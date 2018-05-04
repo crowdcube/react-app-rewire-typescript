@@ -59,13 +59,6 @@ function rewireTypescript(config, env, typescriptLoaderOptions = {}) {
     paths.appIndexJs = path.resolve(fs.realpathSync(process.cwd()), 'src')
   }
 
-  // Change the hardcoded `index.js` to just `index`, so that it will resolve as
-  // whichever file is available. The use of `fs` is to handle things like
-  // symlinks.
-  config.entry = config.entry
-    .slice(0, config.entry.length - 1)
-    .concat([path.resolve(fs.realpathSync(process.cwd()), 'src/index')])
-
   // Add Typescript files to automatic file resolution for Webpack.
   config.resolve.extensions = (config.resolve.extensions || []).concat([
     '.web.ts',
